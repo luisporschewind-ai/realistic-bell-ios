@@ -28,7 +28,7 @@ static const BellDSPContactProfile kContactProfile = {
     .load_reference = 9.80665f,
     .speed_reference = 0.55f,
     .surface_samples_per_meter = 1400.0f,
-    .excitation_gain = 0.00009f,
+    .excitation_gain = 1.8f,
     .attack_seconds = 0.008f,
     .release_seconds = 0.040f,
     .timeout_seconds = 0.080f,
@@ -295,6 +295,34 @@ static void test_fast_slide_is_brighter_and_denser_than_slow_slide(void) {
     assert(fast_peak < 0.98f);
 }
 
+static void test_continuous_contact_reaches_audible_but_bounded_level(void) {
+    BellModalDSP *dsp = make_dsp();
+    float left[480];
+    float right[480];
+    double energy = 0.0;
+    float peak = 0.0f;
+
+    for (unsigned int packet = 0; packet < 100u; packet++) {
+        assert(BellModalDSPEnqueueContact(
+            dsp,
+            contact(true, 9.80665f, 0.80f, 0.2f, 0.1f)
+        ));
+        BellModalDSPRender(dsp, left, right, 480u);
+        for (unsigned int frame = 0; frame < 480u; frame++) {
+            float mono = 0.5f * (left[frame] + right[frame]);
+            float magnitude = fabsf(mono);
+            if (magnitude > peak) { peak = magnitude; }
+            energy += (double)mono * mono;
+        }
+    }
+
+    double rms = sqrt(energy / 48000.0);
+    assert(peak > 0.010f);
+    assert(rms > 0.001f);
+    assert(peak < 0.20f);
+    BellModalDSPDestroy(dsp);
+}
+
 static void test_contact_packet_updates_do_not_click(void) {
     BellModalDSP *dsp = make_dsp();
     assert(BellModalDSPEnqueueContact(
@@ -378,6 +406,7 @@ int main(void) {
     test_detached_zero_load_and_zero_speed_create_no_contact_energy();
     test_zero_gain_modes_produce_no_dry_contact_noise();
     test_fast_slide_is_brighter_and_denser_than_slow_slide();
+    test_continuous_contact_reaches_audible_but_bounded_level();
     test_contact_packet_updates_do_not_click();
     test_stale_contact_releases_after_eighty_milliseconds();
     test_contact_updates_do_not_clear_impact_tail();
