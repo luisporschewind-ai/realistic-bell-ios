@@ -396,23 +396,23 @@ git commit -m "功能：接通铃舌持续接触声音"
 - Consumes: Tasks 1–4.
 - Produces: verified build and explicit real-device acceptance procedure.
 
-- [ ] **Step 1: Run all standalone tests from fresh compiles**
+- [x] **Step 1: Run all standalone tests from fresh compiles**
 
 Run every existing Swift test plus the new contact model, profile, and mapping tests. Run normal and ASan/UBSan C DSP tests. Count every executable and record pass/fail; do not report partial success as complete.
 
-- [ ] **Step 2: Run a fresh unsigned iPhoneOS build**
+- [x] **Step 2: Run a fresh unsigned iPhoneOS build**
 
 Use a new `/tmp/realistic-bell-contact-final-derived` path and require `** BUILD SUCCEEDED **`.
 
-- [ ] **Step 3: Inspect real-time safety and source ownership**
+- [x] **Step 3: Inspect real-time safety and source ownership**
 
 Verify by source inspection that `BellModalDSPRender` contains no allocation, lock, logging, file I/O, or Swift callback. Search for contact inference and confirm only `BellClapperSimulator` constructs touching `BellContactState` values.
 
-- [ ] **Step 4: Update documentation status**
+- [x] **Step 4: Update documentation status**
 
 Mark automated implementation complete while leaving acoustic acceptance pending. Document that sample fallback has no sustained contact layer and that the baseline remains recoverable through tag `realistic-bell-baseline-v1`.
 
-- [ ] **Step 5: Commit verified implementation state**
+- [x] **Step 5: Commit verified implementation state**
 
 ```bash
 git add README.md docs/superpowers/specs/2026-08-21-3d-bell-design.md \
