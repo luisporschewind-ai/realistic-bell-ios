@@ -114,6 +114,8 @@ final class BellSampleAudioEngine: BellAudioPlaying {
         nextVoiceIndex = 0
     }
 
+    func update(contact: BellContactState, profile: BellContactSoundProfile) {}
+
     private func loadSamples() {
         let names = (1...5).map { String(format: "bell_hit_%02d", $0) }
         buffers = names.compactMap { name in

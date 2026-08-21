@@ -160,11 +160,11 @@ protocol BellAudioPlaying: AnyObject {
 }
 ```
 
-- [ ] **Step 1: Write failing profile tests**
+- [x] **Step 1: Write failing profile tests**
 
 Assert the reference profile has positive finite values, attack in `0.005...0.010`, release in `0.030...0.050`, timeout exactly `0.080`, and `firstExcitedModeIndex` inside the 12-mode bell profile. Use literal expected ranges, not production helpers.
 
-- [ ] **Step 2: Write failing routing tests**
+- [x] **Step 2: Write failing routing tests**
 
 Extend `FakePlayer` with captured contact updates. Assert:
 
@@ -173,13 +173,13 @@ Extend `FakePlayer` with captured contact updates. Assert:
 - contact updates never change `activeEngine`;
 - `stop()` still reaches both renderers.
 
-- [ ] **Step 3: Run the tests and verify compilation fails**
+- [x] **Step 3: Run the tests and verify compilation fails**
 
 Compile `BellContactSoundProfileTests.swift` with `BellContactSoundProfile.swift` and `BellModalProfile.swift`. Compile `BellAudioRoutingTests.swift` with the audio facade, routing policy, contact model, impact model, config, and clapper parameters.
 
 Expected before implementation: missing type/method failures.
 
-- [ ] **Step 4: Implement profile and routing contract**
+- [x] **Step 4: Implement profile and routing contract**
 
 Use these initial physically scaled values in one place:
 
@@ -198,11 +198,11 @@ static let smallBrassHandbell = BellContactSoundProfile(
 
 `BellAudioEngine.update` forwards only while `.modal` is active. `BellSampleAudioEngine.update` is an explicit no-op. Do not trigger fallback when a contact update is unavailable; sample fallback cannot represent this layer.
 
-- [ ] **Step 5: Run profile and routing tests**
+- [x] **Step 5: Run profile and routing tests**
 
 Expected: both test executables print `passed` and exit `0`.
 
-- [ ] **Step 6: Commit the audio contract**
+- [x] **Step 6: Commit the audio contract**
 
 ```bash
 git add RealisticBell/Models/BellContactSoundProfile.swift \

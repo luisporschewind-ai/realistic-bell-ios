@@ -41,6 +41,11 @@ final class BellAudioEngine: BellAudioPlaying {
         }
     }
 
+    func update(contact: BellContactState, profile: BellContactSoundProfile) {
+        guard activeEngine == .modal else { return }
+        modal.update(contact: contact, profile: profile)
+    }
+
     func stop() {
         modal.stop()
         sample.stop()
