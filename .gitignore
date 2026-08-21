@@ -3,6 +3,7 @@ DerivedData/
 build/
 *.xcuserstate
 xcuserdata/
+.worktrees/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
