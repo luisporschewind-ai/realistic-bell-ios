@@ -254,7 +254,7 @@ bool BellModalDSPEnqueueContact(BellModalDSP *dsp, BellDSPContact contact);
 
 Extend `BellModalDSPCreate` with `const BellDSPContactProfile *contact_profile`. Keep a single ordered SPSC event queue with an internal event kind so impact and contact ordering is deterministic.
 
-- [ ] **Step 1: Write failing contact-output tests**
+- [x] **Step 1: Write failing contact-output tests**
 
 Add literal-fixture tests for:
 
@@ -271,7 +271,7 @@ test_tangential_impact_excites_modes_without_dry_noise();
 
 For the no-dry-noise case, create valid modes with gain `0`, enqueue a touching contact, render 4,800 frames, and assert every sample is exactly zero. For slow/fast comparison, use identical nonzero load and render one second; compare first-difference energy and require fast energy to exceed slow energy by at least 20%, while peak remains below `0.98`.
 
-- [ ] **Step 2: Run normal C tests and verify new tests fail**
+- [x] **Step 2: Run normal C tests and verify new tests fail**
 
 ```bash
 clang -std=c11 -Wall -Wextra -Werror \
@@ -282,15 +282,15 @@ clang -std=c11 -Wall -Wextra -Werror \
 
 Expected: compilation or behavioral failure because contact synthesis is absent.
 
-- [ ] **Step 3: Replace dry transient with ordered contact events**
+- [x] **Step 3: Replace dry transient with ordered contact events**
 
 Introduce an internal tagged event containing either `BellDSPImpact` or `BellDSPContact`; retain release/acquire SPSC ordering. Remove `noise_left`, `noise_right`, and direct calls that add random samples to `left_sample`/`right_sample`. Map impact tangential energy into the existing upper modal excitation only.
 
-- [ ] **Step 4: Precompute deterministic multi-scale roughness**
+- [x] **Step 4: Precompute deterministic multi-scale roughness**
 
 Allocate a fixed `1024`-sample roughness table inside `BellModalDSP`. Fill it during creation using the existing deterministic xorshift generator, then smooth at two scales and remove DC. Rendering only reads/interpolates this table; it performs no allocation and does not regenerate randomness per contact packet.
 
-- [ ] **Step 5: Implement per-sample contact excitation**
+- [x] **Step 5: Implement per-sample contact excitation**
 
 Maintain continuous phase, previous roughness, smoothed load/speed/contact direction, envelope, and frames-since-update. Advance phase by:
 
@@ -302,7 +302,7 @@ Linearly interpolate the circular roughness table. Convert positive high-passed 
 
 Use the configured attack/release coefficients. After `timeout_seconds * sample_rate` frames without a fresh valid contact packet, set the target to detached and release the envelope.
 
-- [ ] **Step 6: Run normal and sanitized DSP tests**
+- [x] **Step 6: Run normal and sanitized DSP tests**
 
 Run the normal executable, then compile with:
 
