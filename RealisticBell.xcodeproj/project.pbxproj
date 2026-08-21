@@ -27,6 +27,7 @@
 		630000000000000000000007 /* BellAudioSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630000000000000000000008 /* BellAudioSessionController.swift */; };
 		640000000000000000000001 /* BellContactState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640000000000000000000002 /* BellContactState.swift */; };
 		650000000000000000000001 /* BellContactSoundProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650000000000000000000002 /* BellContactSoundProfile.swift */; };
+		660000000000000000000001 /* BellModalContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660000000000000000000002 /* BellModalContact.swift */; };
 		707070707070707070707070 /* BellPresentationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808080808080808080808080 /* BellPresentationConfiguration.swift */; };
 		1B1B1B1B1B1B1B1B1B1B1B1B /* BellSoundPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C2C2C2C2C2C2C2C2C2C2C /* BellSoundPreference.swift */; };
 		1561453A64BB55EF7DD7EC48 /* BellAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A0A43E37318ADEFD2B030 /* BellAudioEngine.swift */; };
@@ -76,6 +77,7 @@
 		630000000000000000000008 /* BellAudioSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellAudioSessionController.swift; sourceTree = "<group>"; };
 		640000000000000000000002 /* BellContactState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellContactState.swift; sourceTree = "<group>"; };
 		650000000000000000000002 /* BellContactSoundProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellContactSoundProfile.swift; sourceTree = "<group>"; };
+		660000000000000000000002 /* BellModalContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellModalContact.swift; sourceTree = "<group>"; };
 		808080808080808080808080 /* BellPresentationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellPresentationConfiguration.swift; sourceTree = "<group>"; };
 		B9C0C90ACAA57B7BDECDE067 /* BellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellView.swift; sourceTree = "<group>"; };
 		D4D4D4D4D4D4D4D4D4D4D4D4 /* BellSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellSceneView.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				919191919191919191919191 /* BellImpactEvent.swift */,
 				640000000000000000000002 /* BellContactState.swift */,
 				650000000000000000000002 /* BellContactSoundProfile.swift */,
+				660000000000000000000002 /* BellModalContact.swift */,
 				939393939393939393939393 /* BellClapperParameters.swift */,
 				979797979797979797979797 /* BellClapperOrientation.swift */,
 				620000000000000000000002 /* BellModalProfile.swift */,
@@ -317,6 +320,7 @@
 				929292929292929292929292 /* BellImpactEvent.swift in Sources */,
 				640000000000000000000001 /* BellContactState.swift in Sources */,
 				650000000000000000000001 /* BellContactSoundProfile.swift in Sources */,
+				660000000000000000000001 /* BellModalContact.swift in Sources */,
 				949494949494949494949494 /* BellClapperParameters.swift in Sources */,
 				969696969696969696969696 /* BellClapperSimulator.swift in Sources */,
 				989898989898989898989898 /* BellClapperOrientation.swift in Sources */,

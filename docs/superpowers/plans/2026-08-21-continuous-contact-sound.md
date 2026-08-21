@@ -339,29 +339,29 @@ git commit -m "功能：合成铜铃持续接触微碰撞"
 - Consumes: `BellContactState`, `BellContactSoundProfile`, and Task 3 C API.
 - Produces: validated `BellDSPContact` packets at each motion update while modal audio is active.
 
-- [ ] **Step 1: Write failing mapping tests**
+- [x] **Step 1: Write failing mapping tests**
 
 Define `BellModalContactPayload` mirroring the C fields. Test exact preservation of valid physical units, normalization of contact direction, clamping of negative acceleration/speed to zero, and safe detached fallback for any non-finite input.
 
-- [ ] **Step 2: Run tests and verify missing mapping failure**
+- [x] **Step 2: Run tests and verify missing mapping failure**
 
 Compile mapping tests with `BellContactState.swift` and the new mapping file. Expected: missing type/file failure.
 
-- [ ] **Step 3: Implement Swift-to-C mapping and engine update**
+- [x] **Step 3: Implement Swift-to-C mapping and engine update**
 
 `BellModalAudioEngine.prepare` maps `BellContactSoundProfile.smallBrassHandbell` into `BellDSPContactProfile` and passes it to DSP creation. `update(contact:profile:)` validates/maps the state and calls `BellModalDSPEnqueueContact` only when ready and running.
 
 Do not recreate the engine or allocate audio buffers on contact updates. If enqueue fails, drop that intermediate update; the 80 ms DSP timeout is the fail-safe.
 
-- [ ] **Step 4: Connect `BellViewModel` lifecycle**
+- [x] **Step 4: Connect `BellViewModel` lifecycle**
 
 In every handled motion sample, publish `step.state`, then—when sound is enabled—forward `step.contact` before handling any optional impact. Keep impact count/haptic/audio handling in `handleImpact` unchanged. On sound off, stop, background, or recovery, DSP destruction/reset provides the detached state; no contact source survives the engine lifecycle.
 
-- [ ] **Step 5: Run mapping, impact-pipeline, routing, and simulator tests**
+- [x] **Step 5: Run mapping, impact-pipeline, routing, and simulator tests**
 
 Expected: all four executables print `passed`. The existing impact-pipeline and simulator tests still prove that only `BellImpactEvent` values update collision metrics, while routing tests prove contact updates do not invoke sample impact playback.
 
-- [ ] **Step 6: Run an unsigned iPhoneOS build**
+- [x] **Step 6: Run an unsigned iPhoneOS build**
 
 ```bash
 xcodebuild -project RealisticBell.xcodeproj -scheme RealisticBell \
