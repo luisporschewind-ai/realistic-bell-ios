@@ -57,11 +57,11 @@ struct BellSimulationStep: Equatable {
 }
 ```
 
-- [ ] **Step 1: Write failing contact-contract tests**
+- [x] **Step 1: Write failing contact-contract tests**
 
 In `Tests/BellContactStateTests.swift`, construct one valid touching state and assert exact field preservation and `isFinite == true`. Construct states with `.nan` in timestamp, normal acceleration, tangential speed, and each direction component; assert `isFinite == false`. Assert `detached(timestamp: 2.5)` is non-touching with zero acceleration, zero speed, and fallback direction `(0, -1, 0)`.
 
-- [ ] **Step 2: Extend simulator tests before implementation**
+- [x] **Step 2: Extend simulator tests before implementation**
 
 Add these behavioral cases to `BellClapperSimulatorTests.swift`:
 
@@ -83,7 +83,7 @@ precondition(abs(magnitude(step.contact.contactDirection) - 1) < 0.000_001)
 
 Also count `BellImpactEvent` values before and after continued sliding and assert contact updates do not create extra impact events without a new qualifying normal impulse.
 
-- [ ] **Step 3: Run the tests and verify the missing-type failure**
+- [x] **Step 3: Run the tests and verify the missing-type failure**
 
 ```bash
 swiftc -parse-as-library -module-cache-path /tmp/bell-contact-model-cache \
@@ -94,7 +94,7 @@ swiftc -parse-as-library -module-cache-path /tmp/bell-contact-model-cache \
 
 Expected before implementation: compilation fails because `BellContactState.swift` does not exist.
 
-- [ ] **Step 4: Implement the contact state and simulator output**
+- [x] **Step 4: Implement the contact state and simulator output**
 
 Create the model exactly as declared. In `BellClapperSimulator`, compute `normalAcceleration` from the positive outward component of the effective linear acceleration at the boundary, in `m/s²`; do not expose the angular acceleration currently used internally. Compute `tangentialSpeed` from cone-tangent velocity times clapper length. Every return path must include a contact value:
 
@@ -105,13 +105,13 @@ Create the model exactly as declared. In `BellClapperSimulator`, compute `normal
 
 Do not change impact thresholds, restitution, cooldown, clapper direction, or tangent velocity.
 
-- [ ] **Step 5: Add the new model to the Xcode target and run both tests**
+- [x] **Step 5: Add the new model to the Xcode target and run both tests**
 
 Compile/run `BellContactStateTests.swift`, then compile/run `BellClapperSimulatorTests.swift` with `MotionSample.swift`, `BellMotionInput.swift`, `BellClapperParameters.swift`, `BellContactState.swift`, `BellImpactEvent.swift`, `BellGeometryProfile.swift`, `BellConfig.swift`, and `BellClapperSimulator.swift`.
 
 Expected: both executables print their `passed` message and exit `0`.
 
-- [ ] **Step 6: Commit the physical contact contract**
+- [x] **Step 6: Commit the physical contact contract**
 
 ```bash
 git add RealisticBell/Models/BellContactState.swift \
