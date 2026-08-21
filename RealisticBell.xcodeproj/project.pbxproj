@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E3BE0E2B00F031BC8FAB636 /* bell_hit_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB5BF6865D279B377E696911 /* bell_hit_01.wav */; };
+		12BEA190232FCCB5998DF562 /* BellConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CBEBD0A50042C74D943611 /* BellConfig.swift */; };
+		1C1C1C1C1C1C1C1C1C1C1C1C /* BellMotionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2D2D2D2D2D2D2D2D2D2D2D /* BellMotionInput.swift */; };
+		1E1E1E1E1E1E1E1E1E1E1E1E /* BellGeometryProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2F2F2F2F2F2F2F2F2F2F2F /* BellGeometryProfile.swift */; };
+		929292929292929292929292 /* BellImpactEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919191919191919191919191 /* BellImpactEvent.swift */; };
+		949494949494949494949494 /* BellClapperParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939393939393939393939393 /* BellClapperParameters.swift */; };
+		969696969696969696969696 /* BellClapperSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959595959595959595959595 /* BellClapperSimulator.swift */; };
+		989898989898989898989898 /* BellClapperOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979797979797979797979797 /* BellClapperOrientation.swift */; };
+		303030303030303030303030 /* BellRevolvedMesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404040404040404040404040 /* BellRevolvedMesh.swift */; };
+		505050505050505050505050 /* BellInteractionLimits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 606060606060606060606060 /* BellInteractionLimits.swift */; };
+		610000000000000000000001 /* BellModalDSP.c in Sources */ = {isa = PBXBuildFile; fileRef = 610000000000000000000002 /* BellModalDSP.c */; };
+		620000000000000000000001 /* BellModalProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620000000000000000000002 /* BellModalProfile.swift */; };
+		620000000000000000000003 /* BellModalImpact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620000000000000000000004 /* BellModalImpact.swift */; };
+		620000000000000000000005 /* BellModalAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620000000000000000000006 /* BellModalAudioEngine.swift */; };
+		630000000000000000000001 /* BellAudioRoutingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630000000000000000000002 /* BellAudioRoutingPolicy.swift */; };
+		630000000000000000000003 /* BellAudioPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630000000000000000000004 /* BellAudioPlaying.swift */; };
+		630000000000000000000005 /* BellSampleAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630000000000000000000006 /* BellSampleAudioEngine.swift */; };
+		630000000000000000000007 /* BellAudioSessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630000000000000000000008 /* BellAudioSessionController.swift */; };
+		707070707070707070707070 /* BellPresentationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808080808080808080808080 /* BellPresentationConfiguration.swift */; };
+		1B1B1B1B1B1B1B1B1B1B1B1B /* BellSoundPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C2C2C2C2C2C2C2C2C2C2C /* BellSoundPreference.swift */; };
+		1561453A64BB55EF7DD7EC48 /* BellAudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A0A43E37318ADEFD2B030 /* BellAudioEngine.swift */; };
+		2EE54784A997FEF6CA730033 /* BellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C0C90ACAA57B7BDECDE067 /* BellView.swift */; };
+		A1A1A1A1A1A1A1A1A1A1A1A1 /* BellSceneFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2B2B2B2B2B2B2B2B2B2B2 /* BellSceneFactory.swift */; };
+		C3C3C3C3C3C3C3C3C3C3C3C3 /* BellSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D4D4D4D4D4D4D4D4D4D4D4 /* BellSceneView.swift */; };
+		6F60A647A599017A7DBBDC90 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481B84C776A435FC54003C13 /* HapticService.swift */; };
+		760688E54F3719D737DDD89E /* MotionSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732DE710C3BD6B57818DD7B0 /* MotionSample.swift */; };
+		AEE78739ACF4651FC1778E49 /* RealisticBellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D750EB9E84AE67BF228B2 /* RealisticBellApp.swift */; };
+		C873C7C6B0835C72DE9D48A0 /* BellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7028BDD71FFABA850451902 /* BellViewModel.swift */; };
+		CA9AA9E95C6467E2CB456657 /* DebugPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFA832D74CC4A68A5CAC3FD /* DebugPanelView.swift */; };
+		CC521A113537024AB215450C /* bell_hit_05.wav in Resources */ = {isa = PBXBuildFile; fileRef = DF3E6F0C3D73FC9FAF8C6B67 /* bell_hit_05.wav */; };
+		D887BA83B7D91EB811934C23 /* bell_hit_04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7246C013A9DFF9DA9F529810 /* bell_hit_04.wav */; };
+		DE0393596DF1BCC3AB9A7BD7 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7716D9E461C569E9EB5A2C6D /* MotionService.swift */; };
+		E089CE27B999A21E8D2418C0 /* bell_hit_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F60F678799D1FF1558C280B /* bell_hit_03.wav */; };
+		F4008B0301347441C3CB379F /* bell_hit_02.wav in Resources */ = {isa = PBXBuildFile; fileRef = F12F7B8BB62E8209A56C9B11 /* bell_hit_02.wav */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		188D750EB9E84AE67BF228B2 /* RealisticBellApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealisticBellApp.swift; sourceTree = "<group>"; };
+		481B84C776A435FC54003C13 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
+		56CBEBD0A50042C74D943611 /* BellConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellConfig.swift; sourceTree = "<group>"; };
+		7246C013A9DFF9DA9F529810 /* bell_hit_04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_04.wav; sourceTree = "<group>"; };
+		732DE710C3BD6B57818DD7B0 /* MotionSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionSample.swift; sourceTree = "<group>"; };
+		7716D9E461C569E9EB5A2C6D /* MotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionService.swift; sourceTree = "<group>"; };
+		8F60F678799D1FF1558C280B /* bell_hit_03.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_03.wav; sourceTree = "<group>"; };
+		919191919191919191919191 /* BellImpactEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellImpactEvent.swift; sourceTree = "<group>"; };
+		939393939393939393939393 /* BellClapperParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellClapperParameters.swift; sourceTree = "<group>"; };
+		959595959595959595959595 /* BellClapperSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellClapperSimulator.swift; sourceTree = "<group>"; };
+		979797979797979797979797 /* BellClapperOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellClapperOrientation.swift; sourceTree = "<group>"; };
+		ABFA832D74CC4A68A5CAC3FD /* DebugPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPanelView.swift; sourceTree = "<group>"; };
+		B2B2B2B2B2B2B2B2B2B2B2B2 /* BellSceneFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellSceneFactory.swift; sourceTree = "<group>"; };
+		2C2C2C2C2C2C2C2C2C2C2C2C /* BellSoundPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellSoundPreference.swift; sourceTree = "<group>"; };
+		2D2D2D2D2D2D2D2D2D2D2D2D /* BellMotionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellMotionInput.swift; sourceTree = "<group>"; };
+		2F2F2F2F2F2F2F2F2F2F2F2F /* BellGeometryProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellGeometryProfile.swift; sourceTree = "<group>"; };
+		404040404040404040404040 /* BellRevolvedMesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellRevolvedMesh.swift; sourceTree = "<group>"; };
+		606060606060606060606060 /* BellInteractionLimits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellInteractionLimits.swift; sourceTree = "<group>"; };
+		610000000000000000000002 /* BellModalDSP.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BellModalDSP.c; sourceTree = "<group>"; };
+		610000000000000000000003 /* BellModalDSP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BellModalDSP.h; sourceTree = "<group>"; };
+		620000000000000000000002 /* BellModalProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellModalProfile.swift; sourceTree = "<group>"; };
+		620000000000000000000004 /* BellModalImpact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellModalImpact.swift; sourceTree = "<group>"; };
+		620000000000000000000006 /* BellModalAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellModalAudioEngine.swift; sourceTree = "<group>"; };
+		620000000000000000000007 /* RealisticBell-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealisticBell-Bridging-Header.h"; sourceTree = "<group>"; };
+		630000000000000000000002 /* BellAudioRoutingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellAudioRoutingPolicy.swift; sourceTree = "<group>"; };
+		630000000000000000000004 /* BellAudioPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellAudioPlaying.swift; sourceTree = "<group>"; };
+		630000000000000000000006 /* BellSampleAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellSampleAudioEngine.swift; sourceTree = "<group>"; };
+		630000000000000000000008 /* BellAudioSessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellAudioSessionController.swift; sourceTree = "<group>"; };
+		808080808080808080808080 /* BellPresentationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellPresentationConfiguration.swift; sourceTree = "<group>"; };
+		B9C0C90ACAA57B7BDECDE067 /* BellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellView.swift; sourceTree = "<group>"; };
+		D4D4D4D4D4D4D4D4D4D4D4D4 /* BellSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellSceneView.swift; sourceTree = "<group>"; };
+		BB5BF6865D279B377E696911 /* bell_hit_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_01.wav; sourceTree = "<group>"; };
+		C47A0A43E37318ADEFD2B030 /* BellAudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellAudioEngine.swift; sourceTree = "<group>"; };
+		C7028BDD71FFABA850451902 /* BellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BellViewModel.swift; sourceTree = "<group>"; };
+		DF3E6F0C3D73FC9FAF8C6B67 /* bell_hit_05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_05.wav; sourceTree = "<group>"; };
+		F12F7B8BB62E8209A56C9B11 /* bell_hit_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_02.wav; sourceTree = "<group>"; };
+		F5BF48AA40CAD7891EB709FC /* RealisticBell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealisticBell.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F6F5CC3FCCF73F75AE9CCF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		45B877375D6D6297BAAF2860 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AD70DE73CF4DAFD344A1AA7C /* Audio */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		564EAF51B7DD4639ADD9B985 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7716D9E461C569E9EB5A2C6D /* MotionService.swift */,
+				C47A0A43E37318ADEFD2B030 /* BellAudioEngine.swift */,
+				481B84C776A435FC54003C13 /* HapticService.swift */,
+				959595959595959595959595 /* BellClapperSimulator.swift */,
+				620000000000000000000006 /* BellModalAudioEngine.swift */,
+				630000000000000000000004 /* BellAudioPlaying.swift */,
+				630000000000000000000006 /* BellSampleAudioEngine.swift */,
+				630000000000000000000008 /* BellAudioSessionController.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5928955287B8089ED2177128 = {
+			isa = PBXGroup;
+			children = (
+				BDF5355FAD58B30BF2095281 /* RealisticBell */,
+				D59F6469233080B6364F20D4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		604A2BDA57696913506E8984 /* Bell */ = {
+			isa = PBXGroup;
+			children = (
+				B9C0C90ACAA57B7BDECDE067 /* BellView.swift */,
+				C7028BDD71FFABA850451902 /* BellViewModel.swift */,
+				ABFA832D74CC4A68A5CAC3FD /* DebugPanelView.swift */,
+				B2B2B2B2B2B2B2B2B2B2B2B2 /* BellSceneFactory.swift */,
+				D4D4D4D4D4D4D4D4D4D4D4D4 /* BellSceneView.swift */,
+			);
+			path = Bell;
+			sourceTree = "<group>";
+		};
+		610000000000000000000004 /* AudioDSP */ = {
+			isa = PBXGroup;
+			children = (
+				610000000000000000000003 /* BellModalDSP.h */,
+				610000000000000000000002 /* BellModalDSP.c */,
+			);
+			path = AudioDSP;
+			sourceTree = "<group>";
+		};
+		620000000000000000000008 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				620000000000000000000007 /* RealisticBell-Bridging-Header.h */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		9CF43B31E8845D861542A38E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				732DE710C3BD6B57818DD7B0 /* MotionSample.swift */,
+				919191919191919191919191 /* BellImpactEvent.swift */,
+				939393939393939393939393 /* BellClapperParameters.swift */,
+				979797979797979797979797 /* BellClapperOrientation.swift */,
+				620000000000000000000002 /* BellModalProfile.swift */,
+				620000000000000000000004 /* BellModalImpact.swift */,
+				630000000000000000000002 /* BellAudioRoutingPolicy.swift */,
+				56CBEBD0A50042C74D943611 /* BellConfig.swift */,
+				2C2C2C2C2C2C2C2C2C2C2C2C /* BellSoundPreference.swift */,
+				2D2D2D2D2D2D2D2D2D2D2D2D /* BellMotionInput.swift */,
+				2F2F2F2F2F2F2F2F2F2F2F2F /* BellGeometryProfile.swift */,
+				404040404040404040404040 /* BellRevolvedMesh.swift */,
+				606060606060606060606060 /* BellInteractionLimits.swift */,
+				808080808080808080808080 /* BellPresentationConfiguration.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AD70DE73CF4DAFD344A1AA7C /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				BB5BF6865D279B377E696911 /* bell_hit_01.wav */,
+				F12F7B8BB62E8209A56C9B11 /* bell_hit_02.wav */,
+				8F60F678799D1FF1558C280B /* bell_hit_03.wav */,
+				7246C013A9DFF9DA9F529810 /* bell_hit_04.wav */,
+				DF3E6F0C3D73FC9FAF8C6B67 /* bell_hit_05.wav */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		BDF5355FAD58B30BF2095281 /* RealisticBell */ = {
+			isa = PBXGroup;
+			children = (
+				FE910D29D648D8F2EA669AEF /* App */,
+				F7A3FAD1BFA84C82EB67ADA9 /* Features */,
+				564EAF51B7DD4639ADD9B985 /* Services */,
+				9CF43B31E8845D861542A38E /* Models */,
+				610000000000000000000004 /* AudioDSP */,
+				620000000000000000000008 /* Support */,
+				45B877375D6D6297BAAF2860 /* Resources */,
+			);
+			path = RealisticBell;
+			sourceTree = "<group>";
+		};
+		D59F6469233080B6364F20D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5BF48AA40CAD7891EB709FC /* RealisticBell.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F7A3FAD1BFA84C82EB67ADA9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				604A2BDA57696913506E8984 /* Bell */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		FE910D29D648D8F2EA669AEF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				188D750EB9E84AE67BF228B2 /* RealisticBellApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42AEFBAE01D2DFD981F7DA7D /* RealisticBell */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2857F3DA31A2E77D5F204763 /* Build configuration list for PBXNativeTarget "RealisticBell" */;
+			buildPhases = (
+				F2AB5FB218DA8B84623F4557 /* Sources */,
+				4F6F5CC3FCCF73F75AE9CCF4 /* Frameworks */,
+				55B558C7EF820E6E00E5993B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RealisticBell;
+			productName = RealisticBell;
+			productReference = F5BF48AA40CAD7891EB709FC /* RealisticBell.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					42AEFBAE01D2DFD981F7DA7D = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 97F095DCB76B3BEBE8A459AD /* Build configuration list for PBXProject "RealisticBell" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5928955287B8089ED2177128;
+			productRefGroup = D59F6469233080B6364F20D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42AEFBAE01D2DFD981F7DA7D /* RealisticBell */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55B558C7EF820E6E00E5993B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E3BE0E2B00F031BC8FAB636 /* bell_hit_01.wav in Resources */,
+				F4008B0301347441C3CB379F /* bell_hit_02.wav in Resources */,
+				E089CE27B999A21E8D2418C0 /* bell_hit_03.wav in Resources */,
+				D887BA83B7D91EB811934C23 /* bell_hit_04.wav in Resources */,
+				CC521A113537024AB215450C /* bell_hit_05.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2AB5FB218DA8B84623F4557 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEE78739ACF4651FC1778E49 /* RealisticBellApp.swift in Sources */,
+				2EE54784A997FEF6CA730033 /* BellView.swift in Sources */,
+				A1A1A1A1A1A1A1A1A1A1A1A1 /* BellSceneFactory.swift in Sources */,
+				C3C3C3C3C3C3C3C3C3C3C3C3 /* BellSceneView.swift in Sources */,
+				C873C7C6B0835C72DE9D48A0 /* BellViewModel.swift in Sources */,
+				CA9AA9E95C6467E2CB456657 /* DebugPanelView.swift in Sources */,
+				DE0393596DF1BCC3AB9A7BD7 /* MotionService.swift in Sources */,
+				1561453A64BB55EF7DD7EC48 /* BellAudioEngine.swift in Sources */,
+				6F60A647A599017A7DBBDC90 /* HapticService.swift in Sources */,
+				760688E54F3719D737DDD89E /* MotionSample.swift in Sources */,
+				929292929292929292929292 /* BellImpactEvent.swift in Sources */,
+				949494949494949494949494 /* BellClapperParameters.swift in Sources */,
+				969696969696969696969696 /* BellClapperSimulator.swift in Sources */,
+				989898989898989898989898 /* BellClapperOrientation.swift in Sources */,
+				12BEA190232FCCB5998DF562 /* BellConfig.swift in Sources */,
+				1B1B1B1B1B1B1B1B1B1B1B1B /* BellSoundPreference.swift in Sources */,
+				1C1C1C1C1C1C1C1C1C1C1C1C /* BellMotionInput.swift in Sources */,
+				1E1E1E1E1E1E1E1E1E1E1E1E /* BellGeometryProfile.swift in Sources */,
+				303030303030303030303030 /* BellRevolvedMesh.swift in Sources */,
+				505050505050505050505050 /* BellInteractionLimits.swift in Sources */,
+				610000000000000000000001 /* BellModalDSP.c in Sources */,
+				620000000000000000000001 /* BellModalProfile.swift in Sources */,
+				620000000000000000000003 /* BellModalImpact.swift in Sources */,
+				620000000000000000000005 /* BellModalAudioEngine.swift in Sources */,
+				630000000000000000000001 /* BellAudioRoutingPolicy.swift in Sources */,
+				630000000000000000000003 /* BellAudioPlaying.swift in Sources */,
+				630000000000000000000005 /* BellSampleAudioEngine.swift in Sources */,
+				630000000000000000000007 /* BellAudioSessionController.swift in Sources */,
+				707070707070707070707070 /* BellPresentationConfiguration.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4DC7B479A29173674AFD7BAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4M4EACBGAJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/RealisticBell/AudioDSP";
+				INFOPLIST_KEY_CFBundleDisplayName = "Realistic Bell";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luisporschewind.realisticbell;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RealisticBell/Support/RealisticBell-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		683105B965893FCC643C4ECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4M4EACBGAJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/RealisticBell/AudioDSP";
+				INFOPLIST_KEY_CFBundleDisplayName = "Realistic Bell";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luisporschewind.realisticbell;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "RealisticBell/Support/RealisticBell-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		71307F56FE0F050CBFE8BD6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D4147F9DEB4AD84BF3A14790 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2857F3DA31A2E77D5F204763 /* Build configuration list for PBXNativeTarget "RealisticBell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				683105B965893FCC643C4ECF /* Debug */,
+				4DC7B479A29173674AFD7BAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97F095DCB76B3BEBE8A459AD /* Build configuration list for PBXProject "RealisticBell" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71307F56FE0F050CBFE8BD6D /* Debug */,
+				D4147F9DEB4AD84BF3A14790 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}
