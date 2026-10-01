@@ -43,6 +43,8 @@ struct BellSceneView: UIViewRepresentable {
         var presentationRoot: SCNNode?
         var clapperPivot: SCNNode?
         private var dragStartAngles = SCNVector3Zero
+        private var displayMotion = BellClapperDisplayMotion()
+        private var lastDisplayTimestamp: TimeInterval?
 
         @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
             guard let view = gesture.view as? SCNView, let presentationRoot else { return }
@@ -86,8 +88,14 @@ struct BellSceneView: UIViewRepresentable {
 
         func apply(_ state: BellClapperState) {
             guard let clapperPivot else { return }
+            displayMotion.setTarget(state)
+
+            let now = CACurrentMediaTime()
+            let elapsed = lastDisplayTimestamp.map { now - $0 } ?? (1.0 / 60.0)
+            lastDisplayTimestamp = now
+            displayMotion.advance(by: elapsed)
             clapperPivot.simdOrientation = BellClapperOrientation.quaternion(
-                for: state.direction
+                for: displayMotion.direction
             )
         }
     }

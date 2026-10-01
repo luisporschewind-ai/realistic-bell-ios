@@ -7,3 +7,5 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+.harness/
+.vera/

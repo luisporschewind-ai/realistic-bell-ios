@@ -1,58 +1,49 @@
-# Realistic Bell iOS — V0.1
+# Realistic Bell iOS — V0.2
 
-一个苹果原生 SwiftUI 仿真摇铃实验：摇动 iPhone 时，根据 CoreMotion 的真实运动数据触发铃铛碰撞声和 Core Haptics 触觉反馈。
+Realistic Bell 是一个原生 iPhone 仿真摇铃 App。它读取设备运动数据，模拟铃舌在铃体中的三维运动，并在碰撞时播放铃声和触觉反馈。
 
-## V0.1 已实现
+## 当前实现
 
-- SwiftUI 单页交互
-- CoreMotion `deviceMotion` 100Hz 采样
-- 加速度峰值 + 方向反转/jerk 碰撞判定
-- 8 voice `AVAudioEngine` 重叠播放，允许自然余音叠加
-- 5 个临时 WAV 铃声样本随机播放
-- 根据碰撞力度控制音量
-- 小范围随机 Pitch，降低机械重复感
-- CoreHaptics 短促碰撞反馈
-- 长按主界面打开 Debug Panel，可实时调整 threshold / cooldown / jerk / volume / pitch / haptic
+- SwiftUI 主界面和长按呼出的调试面板。
+- CoreMotion `deviceMotion`，采样间隔 100 Hz。
+- 固定步长三维铃舌模拟，综合重力、平移加速度与设备旋转，计算铃舌方向、速度和撞击事件。
+- 按铃体内部几何约束铃舌运动，并在 SceneKit 显示层插值方向和角速度，改善换向惯性与边界穿透。
+- 48 kHz 双声道 C11 模态合成器优先；合成引擎无法准备或接受冲击时，回退到五组 WAV 采样和八个重叠播放声部。
+- Core Haptics 瞬态反馈；声音可单独开关。
+- 处理音频中断、路由变化与音频服务重置后的恢复。
 
-## 运行
+## 打开和运行
 
-1. 使用 Xcode 26.x 打开 `RealisticBell.xcodeproj`
-2. 在 Signing & Capabilities 选择自己的 Development Team
-3. 连接 iPhone 真机
-4. Run
-5. 摇动手机测试
+1. 用 Xcode 打开 `RealisticBell.xcodeproj`。
+2. 在 Signing & Capabilities 中选择自己的 Development Team。
+3. 连接 iPhone，选择设备并运行。
+4. 摇动手机体验；长按铃铛约 0.7 秒打开调试参数。
 
-> CoreMotion 与触觉体验必须以真机为准，模拟器不用于验收。
+项目最低部署版本为 iOS 17。CoreMotion、Core Haptics 和实际音频体验需要在支持相应能力的真机上评估；本仓库状态不代表已发布 App Store 或 TestFlight 版本。
 
-## 调参
+## 调试参数
 
-主界面长按约 0.7 秒打开调参面板。
+调试面板可以调整铃舌阻尼、回弹、最小撞击速度、碰撞冷却、平移与旋转响应、音量、音高随机范围和触觉强度，也可以恢复默认值。默认值以 `RealisticBell/Models/BellConfig.swift` 为准。
 
-默认参数：
+## 目录
 
-- Collision Threshold: `0.82`
-- Cooldown: `0.115s`
-- Jerk Threshold: `0.55`
-- Minimum Strength: `0.12`
-- Volume Gain: `1.0`
-- Pitch Randomness: `0.018`
-- Haptic Gain: `0.72`
+```text
+RealisticBell/
+  App/                 SwiftUI 应用入口
+  Features/Bell/       页面、视图模型、SceneKit 场景和调试面板
+  Models/              运动输入、铃舌状态、几何、配置与撞击事件
+  Services/            CoreMotion、铃舌模拟、音频路由、采样音频和触觉
+  AudioDSP/            C11 模态声音合成器
+  Resources/Audio/     WAV 采样回退资源
+  Support/             Swift 与 C 的桥接头
+Tests/                 独立 Swift/C 行为检查源码
+docs/superpowers/      设计规格与实施计划记录
+```
 
-第一轮真机测试重点观察：
+## 当前边界
 
-- 轻微拿起手机是否误响
-- 普通左右摇是否稳定触发
-- 快速摇动是否过密/漏响
-- 停止后是否不再生成新碰撞
-- 声音与触觉是否主观同步
-
-## 当前已知限制
-
-- 当前 5 个 WAV 是为 V0.1 算法验证生成的临时铃声，不代表最终音色品质。
-- V0.1 尚未使用虚拟铃珠刚体模型；当前碰撞算法是启发式算法。
-- 尚未进行具体 iPhone 型号的真机参数标定。
-- 无 3D、无联网、无账号、无商业化功能。
-
-## 下一阶段
-
-V0.2 的核心不是继续堆 UI，而是把碰撞系统升级为“虚拟铃珠”：根据设备加速度、重力、虚拟球位置和速度计算真实撞壁事件，再用真实铃铛多力度录音替换临时资源。
+- `main` 分支的接触期间会依据新增外力产生离散冲击事件；连续接触声音另在 `feature/continuous-contact-sound` 分支实现，尚未合入 `main`。
+- 五组 WAV 是采样回退资源，不是完整的多力度真实录音库。
+- 尚无 App Store/TestFlight 发布包；需本机配置签名后从 Xcode 安装。
+- 参数和物理观感仍应以目标 iPhone 真机体验为准。
+- `Tests/` 收录独立 Swift/C 行为检查源码；当前 Xcode 工程没有单独的测试 target。
