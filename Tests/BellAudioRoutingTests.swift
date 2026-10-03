@@ -5,6 +5,8 @@ struct BellAudioRoutingTests {
         testSampleFallbackIsSelectedWhenModalPreparationFails()
         testBothPreparationFailuresStayStopped()
         testRejectedModalEventFallsBackToPreparedSamples()
+        testModalBackendReceivesContinuousContact()
+        testSampleFallbackDoesNotFakeContinuousContact()
         testStopReachesBothPlayers()
         print("BellAudioRoutingTests passed")
     }
@@ -63,6 +65,32 @@ struct BellAudioRoutingTests {
         precondition(engine.activeEngine == .stopped)
     }
 
+    private static func testModalBackendReceivesContinuousContact() {
+        let modal = FakePlayer(prepareResult: true)
+        let sample = FakePlayer(prepareResult: true)
+        let engine = BellAudioEngine(modal: modal, sample: sample)
+        precondition(engine.prepare())
+
+        engine.update(contact: contact(), profile: .smallBrassHandbell)
+
+        precondition(modal.contactUpdates.count == 1)
+        precondition(sample.contactUpdates.isEmpty)
+        precondition(engine.activeEngine == .modal)
+    }
+
+    private static func testSampleFallbackDoesNotFakeContinuousContact() {
+        let modal = FakePlayer(prepareResult: false)
+        let sample = FakePlayer(prepareResult: true)
+        let engine = BellAudioEngine(modal: modal, sample: sample)
+        precondition(engine.prepare())
+
+        engine.update(contact: contact(), profile: .smallBrassHandbell)
+
+        precondition(modal.contactUpdates.isEmpty)
+        precondition(sample.contactUpdates.isEmpty)
+        precondition(engine.activeEngine == .sampleFallback)
+    }
+
     private static func event() -> BellImpactEvent {
         BellImpactEvent(
             timestamp: 1,
@@ -73,6 +101,16 @@ struct BellAudioRoutingTests {
             tangentialSpeed: 0.2
         )
     }
+
+    private static func contact() -> BellContactState {
+        BellContactState(
+            timestamp: 1,
+            isTouchingWall: true,
+            normalAcceleration: 4.5,
+            tangentialSpeed: 0.3,
+            contactDirection: SIMD3(0.2, -0.9, 0.1)
+        )
+    }
 }
 
 private final class FakePlayer: BellAudioPlaying {
@@ -81,6 +119,7 @@ private final class FakePlayer: BellAudioPlaying {
     private(set) var prepareCount = 0
     private(set) var playCount = 0
     private(set) var stopCount = 0
+    private(set) var contactUpdates: [BellContactState] = []
 
     init(prepareResult: Bool, playResults: [Bool] = [true]) {
         self.prepareResult = prepareResult
@@ -95,6 +134,10 @@ private final class FakePlayer: BellAudioPlaying {
     func play(impact: BellImpactEvent, config: BellConfig) -> Bool {
         playCount += 1
         return playResults.isEmpty ? false : playResults.removeFirst()
+    }
+
+    func update(contact: BellContactState, profile: BellContactSoundProfile) {
+        contactUpdates.append(contact)
     }
 
     func stop() {

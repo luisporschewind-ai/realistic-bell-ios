@@ -14,6 +14,7 @@ struct BellClapperState: Equatable {
 
 struct BellSimulationStep: Equatable {
     let state: BellClapperState
+    let contact: BellContactState
     let impact: BellImpactEvent?
 }
 
@@ -31,6 +32,7 @@ struct BellClapperSimulator {
     private var lastSide = SIMD3<Double>(1, 0, 0)
     private var lastImpactTime: TimeInterval = -.infinity
     private var contactDriveBaseline = 0.0
+    private var contact = BellContactState.detached(timestamp: 0)
 
     init(parameters: BellClapperParameters = .referenceTuned) {
         self.parameters = parameters
@@ -49,12 +51,14 @@ struct BellClapperSimulator {
         lastSide = SIMD3(1, 0, 0)
         lastImpactTime = -.infinity
         contactDriveBaseline = 0
+        contact = .detached(timestamp: 0)
     }
 
     mutating func step(input: BellMotionInput) -> BellSimulationStep {
         guard input.isFinite else {
             dampAfterInvalidInput()
-            return BellSimulationStep(state: state, impact: nil)
+            contact = .detached(timestamp: input.timestamp)
+            return BellSimulationStep(state: state, contact: contact, impact: nil)
         }
 
         let gravityLength = magnitude(input.gravity)
@@ -69,7 +73,8 @@ struct BellClapperSimulator {
         guard let previousTimestamp = lastTimestamp else {
             lastTimestamp = input.timestamp
             previousRotationRate = input.rotationRate
-            return BellSimulationStep(state: state, impact: nil)
+            contact = .detached(timestamp: input.timestamp)
+            return BellSimulationStep(state: state, contact: contact, impact: nil)
         }
 
         let elapsed = input.timestamp - previousTimestamp
@@ -77,7 +82,8 @@ struct BellClapperSimulator {
             lastTimestamp = input.timestamp
             previousRotationRate = input.rotationRate
             accumulatedTime = 0
-            return BellSimulationStep(state: state, impact: nil)
+            contact = .detached(timestamp: input.timestamp)
+            return BellSimulationStep(state: state, contact: contact, impact: nil)
         }
 
         lastTimestamp = input.timestamp
@@ -107,7 +113,7 @@ struct BellClapperSimulator {
             accumulatedTime -= fixedTimeStep
         }
 
-        return BellSimulationStep(state: state, impact: strongestImpact)
+        return BellSimulationStep(state: state, contact: contact, impact: strongestImpact)
     }
 
     private mutating func integrate(
@@ -163,6 +169,7 @@ struct BellClapperSimulator {
                 isTouchingWall: false
             )
             contactDriveBaseline = 0
+            contact = .detached(timestamp: timestamp)
             updateLastSide(from: direction)
             return nil
         }
@@ -207,6 +214,17 @@ struct BellClapperSimulator {
             isTouchingWall: true
         )
 
+        let normalComponent = outwardNormal * dot(velocity, outwardNormal)
+        let tangentialVelocity = velocity - normalComponent -
+            direction * dot(velocity, direction)
+        contact = BellContactState(
+            timestamp: timestamp,
+            isTouchingWall: true,
+            normalAcceleration: outwardDrive * parameters.length,
+            tangentialSpeed: magnitude(tangentialVelocity) * parameters.length,
+            contactDirection: direction
+        )
+
         let impactNormalSpeed = max(crossingNormalSpeed, dynamicContactSpeed)
         let crossedWall = !wasTouchingWall &&
             crossingNormalSpeed >= parameters.minimumImpactSpeed
@@ -223,9 +241,6 @@ struct BellClapperSimulator {
         )
         lastImpactTime = timestamp
 
-        let normalComponent = outwardNormal * dot(velocity, outwardNormal)
-        let tangentialVelocity = velocity - normalComponent -
-            direction * dot(velocity, direction)
         return BellImpactEvent(
             timestamp: timestamp,
             strength: strength,

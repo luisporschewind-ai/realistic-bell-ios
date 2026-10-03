@@ -69,6 +69,12 @@ final class BellViewModel: ObservableObject {
         clapperSimulator.update(parameters: config.clapperParameters)
         let step = clapperSimulator.step(input: BellMotionInput(sample: sample))
         clapperState = step.state
+        if BellSoundPreference(isEnabled: soundEnabled).shouldPlaySound {
+            audioEngine?.update(
+                contact: step.contact,
+                profile: .smallBrassHandbell
+            )
+        }
         guard let impact = step.impact else { return }
 
         handleImpact(impact)

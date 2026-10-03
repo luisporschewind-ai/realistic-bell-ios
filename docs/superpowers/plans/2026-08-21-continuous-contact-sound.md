@@ -57,11 +57,11 @@ struct BellSimulationStep: Equatable {
 }
 ```
 
-- [ ] **Step 1: Write failing contact-contract tests**
+- [x] **Step 1: Write failing contact-contract tests**
 
 In `Tests/BellContactStateTests.swift`, construct one valid touching state and assert exact field preservation and `isFinite == true`. Construct states with `.nan` in timestamp, normal acceleration, tangential speed, and each direction component; assert `isFinite == false`. Assert `detached(timestamp: 2.5)` is non-touching with zero acceleration, zero speed, and fallback direction `(0, -1, 0)`.
 
-- [ ] **Step 2: Extend simulator tests before implementation**
+- [x] **Step 2: Extend simulator tests before implementation**
 
 Add these behavioral cases to `BellClapperSimulatorTests.swift`:
 
@@ -83,7 +83,7 @@ precondition(abs(magnitude(step.contact.contactDirection) - 1) < 0.000_001)
 
 Also count `BellImpactEvent` values before and after continued sliding and assert contact updates do not create extra impact events without a new qualifying normal impulse.
 
-- [ ] **Step 3: Run the tests and verify the missing-type failure**
+- [x] **Step 3: Run the tests and verify the missing-type failure**
 
 ```bash
 swiftc -parse-as-library -module-cache-path /tmp/bell-contact-model-cache \
@@ -94,7 +94,7 @@ swiftc -parse-as-library -module-cache-path /tmp/bell-contact-model-cache \
 
 Expected before implementation: compilation fails because `BellContactState.swift` does not exist.
 
-- [ ] **Step 4: Implement the contact state and simulator output**
+- [x] **Step 4: Implement the contact state and simulator output**
 
 Create the model exactly as declared. In `BellClapperSimulator`, compute `normalAcceleration` from the positive outward component of the effective linear acceleration at the boundary, in `m/s²`; do not expose the angular acceleration currently used internally. Compute `tangentialSpeed` from cone-tangent velocity times clapper length. Every return path must include a contact value:
 
@@ -105,13 +105,13 @@ Create the model exactly as declared. In `BellClapperSimulator`, compute `normal
 
 Do not change impact thresholds, restitution, cooldown, clapper direction, or tangent velocity.
 
-- [ ] **Step 5: Add the new model to the Xcode target and run both tests**
+- [x] **Step 5: Add the new model to the Xcode target and run both tests**
 
 Compile/run `BellContactStateTests.swift`, then compile/run `BellClapperSimulatorTests.swift` with `MotionSample.swift`, `BellMotionInput.swift`, `BellClapperParameters.swift`, `BellContactState.swift`, `BellImpactEvent.swift`, `BellGeometryProfile.swift`, `BellConfig.swift`, and `BellClapperSimulator.swift`.
 
 Expected: both executables print their `passed` message and exit `0`.
 
-- [ ] **Step 6: Commit the physical contact contract**
+- [x] **Step 6: Commit the physical contact contract**
 
 ```bash
 git add RealisticBell/Models/BellContactState.swift \
@@ -160,11 +160,11 @@ protocol BellAudioPlaying: AnyObject {
 }
 ```
 
-- [ ] **Step 1: Write failing profile tests**
+- [x] **Step 1: Write failing profile tests**
 
 Assert the reference profile has positive finite values, attack in `0.005...0.010`, release in `0.030...0.050`, timeout exactly `0.080`, and `firstExcitedModeIndex` inside the 12-mode bell profile. Use literal expected ranges, not production helpers.
 
-- [ ] **Step 2: Write failing routing tests**
+- [x] **Step 2: Write failing routing tests**
 
 Extend `FakePlayer` with captured contact updates. Assert:
 
@@ -173,13 +173,13 @@ Extend `FakePlayer` with captured contact updates. Assert:
 - contact updates never change `activeEngine`;
 - `stop()` still reaches both renderers.
 
-- [ ] **Step 3: Run the tests and verify compilation fails**
+- [x] **Step 3: Run the tests and verify compilation fails**
 
 Compile `BellContactSoundProfileTests.swift` with `BellContactSoundProfile.swift` and `BellModalProfile.swift`. Compile `BellAudioRoutingTests.swift` with the audio facade, routing policy, contact model, impact model, config, and clapper parameters.
 
 Expected before implementation: missing type/method failures.
 
-- [ ] **Step 4: Implement profile and routing contract**
+- [x] **Step 4: Implement profile and routing contract**
 
 Use these initial physically scaled values in one place:
 
@@ -188,7 +188,7 @@ static let smallBrassHandbell = BellContactSoundProfile(
     loadReference: 9.80665,
     speedReference: 0.55,
     surfaceSamplesPerMeter: 1_400,
-    excitationGain: 0.00009,
+    excitationGain: 1.8,
     attackSeconds: 0.008,
     releaseSeconds: 0.040,
     timeoutSeconds: 0.080,
@@ -198,11 +198,11 @@ static let smallBrassHandbell = BellContactSoundProfile(
 
 `BellAudioEngine.update` forwards only while `.modal` is active. `BellSampleAudioEngine.update` is an explicit no-op. Do not trigger fallback when a contact update is unavailable; sample fallback cannot represent this layer.
 
-- [ ] **Step 5: Run profile and routing tests**
+- [x] **Step 5: Run profile and routing tests**
 
 Expected: both test executables print `passed` and exit `0`.
 
-- [ ] **Step 6: Commit the audio contract**
+- [x] **Step 6: Commit the audio contract**
 
 ```bash
 git add RealisticBell/Models/BellContactSoundProfile.swift \
@@ -254,7 +254,7 @@ bool BellModalDSPEnqueueContact(BellModalDSP *dsp, BellDSPContact contact);
 
 Extend `BellModalDSPCreate` with `const BellDSPContactProfile *contact_profile`. Keep a single ordered SPSC event queue with an internal event kind so impact and contact ordering is deterministic.
 
-- [ ] **Step 1: Write failing contact-output tests**
+- [x] **Step 1: Write failing contact-output tests**
 
 Add literal-fixture tests for:
 
@@ -271,7 +271,7 @@ test_tangential_impact_excites_modes_without_dry_noise();
 
 For the no-dry-noise case, create valid modes with gain `0`, enqueue a touching contact, render 4,800 frames, and assert every sample is exactly zero. For slow/fast comparison, use identical nonzero load and render one second; compare first-difference energy and require fast energy to exceed slow energy by at least 20%, while peak remains below `0.98`.
 
-- [ ] **Step 2: Run normal C tests and verify new tests fail**
+- [x] **Step 2: Run normal C tests and verify new tests fail**
 
 ```bash
 clang -std=c11 -Wall -Wextra -Werror \
@@ -282,15 +282,15 @@ clang -std=c11 -Wall -Wextra -Werror \
 
 Expected: compilation or behavioral failure because contact synthesis is absent.
 
-- [ ] **Step 3: Replace dry transient with ordered contact events**
+- [x] **Step 3: Replace dry transient with ordered contact events**
 
 Introduce an internal tagged event containing either `BellDSPImpact` or `BellDSPContact`; retain release/acquire SPSC ordering. Remove `noise_left`, `noise_right`, and direct calls that add random samples to `left_sample`/`right_sample`. Map impact tangential energy into the existing upper modal excitation only.
 
-- [ ] **Step 4: Precompute deterministic multi-scale roughness**
+- [x] **Step 4: Precompute deterministic multi-scale roughness**
 
 Allocate a fixed `1024`-sample roughness table inside `BellModalDSP`. Fill it during creation using the existing deterministic xorshift generator, then smooth at two scales and remove DC. Rendering only reads/interpolates this table; it performs no allocation and does not regenerate randomness per contact packet.
 
-- [ ] **Step 5: Implement per-sample contact excitation**
+- [x] **Step 5: Implement per-sample contact excitation**
 
 Maintain continuous phase, previous roughness, smoothed load/speed/contact direction, envelope, and frames-since-update. Advance phase by:
 
@@ -302,7 +302,7 @@ Linearly interpolate the circular roughness table. Convert positive high-passed 
 
 Use the configured attack/release coefficients. After `timeout_seconds * sample_rate` frames without a fresh valid contact packet, set the target to detached and release the envelope.
 
-- [ ] **Step 6: Run normal and sanitized DSP tests**
+- [x] **Step 6: Run normal and sanitized DSP tests**
 
 Run the normal executable, then compile with:
 
@@ -339,29 +339,29 @@ git commit -m "功能：合成铜铃持续接触微碰撞"
 - Consumes: `BellContactState`, `BellContactSoundProfile`, and Task 3 C API.
 - Produces: validated `BellDSPContact` packets at each motion update while modal audio is active.
 
-- [ ] **Step 1: Write failing mapping tests**
+- [x] **Step 1: Write failing mapping tests**
 
 Define `BellModalContactPayload` mirroring the C fields. Test exact preservation of valid physical units, normalization of contact direction, clamping of negative acceleration/speed to zero, and safe detached fallback for any non-finite input.
 
-- [ ] **Step 2: Run tests and verify missing mapping failure**
+- [x] **Step 2: Run tests and verify missing mapping failure**
 
 Compile mapping tests with `BellContactState.swift` and the new mapping file. Expected: missing type/file failure.
 
-- [ ] **Step 3: Implement Swift-to-C mapping and engine update**
+- [x] **Step 3: Implement Swift-to-C mapping and engine update**
 
 `BellModalAudioEngine.prepare` maps `BellContactSoundProfile.smallBrassHandbell` into `BellDSPContactProfile` and passes it to DSP creation. `update(contact:profile:)` validates/maps the state and calls `BellModalDSPEnqueueContact` only when ready and running.
 
 Do not recreate the engine or allocate audio buffers on contact updates. If enqueue fails, drop that intermediate update; the 80 ms DSP timeout is the fail-safe.
 
-- [ ] **Step 4: Connect `BellViewModel` lifecycle**
+- [x] **Step 4: Connect `BellViewModel` lifecycle**
 
 In every handled motion sample, publish `step.state`, then—when sound is enabled—forward `step.contact` before handling any optional impact. Keep impact count/haptic/audio handling in `handleImpact` unchanged. On sound off, stop, background, or recovery, DSP destruction/reset provides the detached state; no contact source survives the engine lifecycle.
 
-- [ ] **Step 5: Run mapping, impact-pipeline, routing, and simulator tests**
+- [x] **Step 5: Run mapping, impact-pipeline, routing, and simulator tests**
 
 Expected: all four executables print `passed`. The existing impact-pipeline and simulator tests still prove that only `BellImpactEvent` values update collision metrics, while routing tests prove contact updates do not invoke sample impact playback.
 
-- [ ] **Step 6: Run an unsigned iPhoneOS build**
+- [x] **Step 6: Run an unsigned iPhoneOS build**
 
 ```bash
 xcodebuild -project RealisticBell.xcodeproj -scheme RealisticBell \
@@ -396,23 +396,23 @@ git commit -m "功能：接通铃舌持续接触声音"
 - Consumes: Tasks 1–4.
 - Produces: verified build and explicit real-device acceptance procedure.
 
-- [ ] **Step 1: Run all standalone tests from fresh compiles**
+- [x] **Step 1: Run all standalone tests from fresh compiles**
 
 Run every existing Swift test plus the new contact model, profile, and mapping tests. Run normal and ASan/UBSan C DSP tests. Count every executable and record pass/fail; do not report partial success as complete.
 
-- [ ] **Step 2: Run a fresh unsigned iPhoneOS build**
+- [x] **Step 2: Run a fresh unsigned iPhoneOS build**
 
 Use a new `/tmp/realistic-bell-contact-final-derived` path and require `** BUILD SUCCEEDED **`.
 
-- [ ] **Step 3: Inspect real-time safety and source ownership**
+- [x] **Step 3: Inspect real-time safety and source ownership**
 
 Verify by source inspection that `BellModalDSPRender` contains no allocation, lock, logging, file I/O, or Swift callback. Search for contact inference and confirm only `BellClapperSimulator` constructs touching `BellContactState` values.
 
-- [ ] **Step 4: Update documentation status**
+- [x] **Step 4: Update documentation status**
 
 Mark automated implementation complete while leaving acoustic acceptance pending. Document that sample fallback has no sustained contact layer and that the baseline remains recoverable through tag `realistic-bell-baseline-v1`.
 
-- [ ] **Step 5: Commit verified implementation state**
+- [x] **Step 5: Commit verified implementation state**
 
 ```bash
 git add README.md docs/superpowers/specs/2026-08-21-3d-bell-design.md \

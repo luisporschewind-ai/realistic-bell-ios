@@ -30,13 +30,27 @@ final class BellModalAudioEngine: BellAudioPlaying {
                 gain: Float($0.gain)
             )
         }
-        let createdDSP = modalModes.withUnsafeBufferPointer { buffer in
-            BellModalDSPCreate(
-                format.sampleRate,
-                UInt32(format.channelCount),
-                buffer.baseAddress,
-                UInt32(buffer.count)
-            )
+        let profile = BellContactSoundProfile.smallBrassHandbell
+        var contactProfile = BellDSPContactProfile(
+            load_reference: Float(profile.loadReference),
+            speed_reference: Float(profile.speedReference),
+            surface_samples_per_meter: Float(profile.surfaceSamplesPerMeter),
+            excitation_gain: Float(profile.excitationGain),
+            attack_seconds: Float(profile.attackSeconds),
+            release_seconds: Float(profile.releaseSeconds),
+            timeout_seconds: Float(profile.timeoutSeconds),
+            first_excited_mode_index: UInt32(profile.firstExcitedModeIndex)
+        )
+        let createdDSP = modalModes.withUnsafeBufferPointer { modes in
+            withUnsafePointer(to: &contactProfile) { contactProfilePointer in
+                BellModalDSPCreate(
+                    format.sampleRate,
+                    UInt32(format.channelCount),
+                    modes.baseAddress,
+                    UInt32(modes.count),
+                    contactProfilePointer
+                )
+            }
         }
         guard let createdDSP else { return false }
 
@@ -86,6 +100,21 @@ final class BellModalAudioEngine: BellAudioPlaying {
     @discardableResult
     func play(impact: BellImpactEvent, config: BellConfig) -> Bool {
         enqueue(impact)
+    }
+
+    func update(contact: BellContactState, profile: BellContactSoundProfile) {
+        guard isReady, engine.isRunning, let dsp else { return }
+        let payload = BellModalContactMapping.payload(for: contact)
+        let cContact = BellDSPContact(
+            timestamp: payload.timestamp,
+            is_touching_wall: payload.isTouchingWall,
+            normal_acceleration: Float(payload.normalAcceleration),
+            contact_x: Float(payload.contactDirection.x),
+            contact_y: Float(payload.contactDirection.y),
+            contact_z: Float(payload.contactDirection.z),
+            tangential_speed: Float(payload.tangentialSpeed)
+        )
+        _ = BellModalDSPEnqueueContact(dsp, cContact)
     }
 
     func stop() {

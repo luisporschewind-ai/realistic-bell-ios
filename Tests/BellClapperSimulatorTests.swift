@@ -17,6 +17,10 @@ struct BellClapperSimulatorTests {
         testColdLaunchExactlyInvertedWaitsForDirectionalMotion()
         testInvalidAndStaleInputsDoNotCreateImpacts()
         testParameterUpdatePreservesDynamicState()
+        testFreeMotionReportsDetachedContact()
+        testBoundarySlidingReportsPhysicalContactState()
+        testStaticWallContactHasLoadButNoTangentialMotion()
+        testInvalidInputReturnsDetachedContact()
         print("BellClapperSimulatorTests passed")
     }
 
@@ -349,6 +353,90 @@ struct BellClapperSimulatorTests {
         )).state
 
         precondition(distance(before.direction, after.direction) < 0.02)
+    }
+
+    private static func testFreeMotionReportsDetachedContact() {
+        var simulator = BellClapperSimulator()
+        let step = simulator.step(input: input(gravity: mouthAxis, timestamp: 0))
+
+        precondition(!step.contact.isTouchingWall)
+        precondition(step.contact.normalAcceleration == 0)
+        precondition(step.contact.tangentialSpeed == 0)
+    }
+
+    private static func testBoundarySlidingReportsPhysicalContactState() {
+        var simulator = BellClapperSimulator()
+        _ = simulator.step(input: input(gravity: mouthAxis, timestamp: 0))
+        var slidingContact: BellContactState?
+
+        for index in 1...180 {
+            let acceleration = index < 70
+                ? SIMD3(-3.0, 0, 0)
+                : SIMD3(-3.0, 0, -1.4)
+            let step = simulator.step(input: input(
+                gravity: mouthAxis,
+                acceleration: acceleration,
+                timestamp: Double(index) * 0.01
+            ))
+            if step.contact.isTouchingWall && step.contact.tangentialSpeed > 0.02 {
+                slidingContact = step.contact
+            }
+        }
+
+        guard let contact = slidingContact else {
+            preconditionFailure("Boundary sliding must publish a moving contact")
+        }
+        precondition(contact.normalAcceleration >= 0)
+        precondition(contact.tangentialSpeed > 0.02)
+        precondition(abs(magnitude(contact.contactDirection) - 1) < 0.000_001)
+    }
+
+    private static func testStaticWallContactHasLoadButNoTangentialMotion() {
+        var simulator = BellClapperSimulator()
+        _ = simulator.step(input: input(gravity: mouthAxis, timestamp: 0))
+        var timestamp = 0.0
+        var settledStep: BellSimulationStep?
+        var lateImpacts = 0
+
+        for index in 1...500 {
+            timestamp += 0.01
+            let step = simulator.step(input: input(
+                gravity: mouthAxis,
+                acceleration: SIMD3(-3.0, 0, 0),
+                timestamp: timestamp
+            ))
+            if index > 300, step.impact != nil { lateImpacts += 1 }
+            settledStep = step
+        }
+
+        guard let settledStep else { preconditionFailure("Missing settled step") }
+        precondition(settledStep.contact.isTouchingWall)
+        precondition(settledStep.contact.normalAcceleration > 0)
+        precondition(settledStep.contact.tangentialSpeed < 0.02)
+        precondition(lateImpacts == 0, "Static contact updates must not create impacts")
+    }
+
+    private static func testInvalidInputReturnsDetachedContact() {
+        var simulator = BellClapperSimulator()
+        _ = simulator.step(input: input(gravity: mouthAxis, timestamp: 0))
+        for index in 1...100 {
+            _ = simulator.step(input: input(
+                gravity: mouthAxis,
+                acceleration: SIMD3(-3.0, 0, 0),
+                timestamp: Double(index) * 0.01
+            ))
+        }
+
+        let invalid = simulator.step(input: BellMotionInput(
+            gravity: SIMD3(.nan, -1, 0),
+            userAcceleration: .zero,
+            rotationRate: .zero,
+            timestamp: 1.01
+        ))
+
+        precondition(!invalid.contact.isTouchingWall)
+        precondition(invalid.contact.normalAcceleration == 0)
+        precondition(invalid.contact.tangentialSpeed == 0)
     }
 
     private static func prepareInvertedSimulator(_ simulator: inout BellClapperSimulator) -> Double {
