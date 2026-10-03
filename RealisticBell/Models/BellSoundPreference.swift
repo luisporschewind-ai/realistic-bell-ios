@@ -1,7 +1,7 @@
 import Foundation
 
 struct BellSoundPreference: Equatable {
-    var isEnabled = false
+    var isEnabled = true
 
     var shouldPlaySound: Bool {
         isEnabled
