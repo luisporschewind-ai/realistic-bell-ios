@@ -37,6 +37,7 @@
 		C873C7C6B0835C72DE9D48A0 /* BellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7028BDD71FFABA850451902 /* BellViewModel.swift */; };
 		CA9AA9E95C6467E2CB456657 /* DebugPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFA832D74CC4A68A5CAC3FD /* DebugPanelView.swift */; };
 		CC521A113537024AB215450C /* bell_hit_05.wav in Resources */ = {isa = PBXBuildFile; fileRef = DF3E6F0C3D73FC9FAF8C6B67 /* bell_hit_05.wav */; };
+		B0B0B0B0B0B0B0B0B0B0B0B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1B1B1B1B1B1B1B1B1B1B1B1 /* Assets.xcassets */; };
 		D887BA83B7D91EB811934C23 /* bell_hit_04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7246C013A9DFF9DA9F529810 /* bell_hit_04.wav */; };
 		DE0393596DF1BCC3AB9A7BD7 /* MotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7716D9E461C569E9EB5A2C6D /* MotionService.swift */; };
 		E089CE27B999A21E8D2418C0 /* bell_hit_03.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F60F678799D1FF1558C280B /* bell_hit_03.wav */; };
@@ -81,6 +82,7 @@
 		DF3E6F0C3D73FC9FAF8C6B67 /* bell_hit_05.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_05.wav; sourceTree = "<group>"; };
 		F12F7B8BB62E8209A56C9B11 /* bell_hit_02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell_hit_02.wav; sourceTree = "<group>"; };
 		F5BF48AA40CAD7891EB709FC /* RealisticBell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealisticBell.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1B1B1B1B1B1B1B1B1B1B1B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				610000000000000000000004 /* AudioDSP */,
 				620000000000000000000008 /* Support */,
 				45B877375D6D6297BAAF2860 /* Resources */,
+				B1B1B1B1B1B1B1B1B1B1B1B1 /* Assets.xcassets */,
 			);
 			path = RealisticBell;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				E089CE27B999A21E8D2418C0 /* bell_hit_03.wav in Resources */,
 				D887BA83B7D91EB811934C23 /* bell_hit_04.wav in Resources */,
 				CC521A113537024AB215450C /* bell_hit_05.wav in Resources */,
+				B0B0B0B0B0B0B0B0B0B0B0B0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +344,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4M4EACBGAJ;
 				GENERATE_INFOPLIST_FILE = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/RealisticBell/AudioDSP";
 				INFOPLIST_KEY_CFBundleDisplayName = "Realistic Bell";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -369,6 +374,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4M4EACBGAJ;
 				GENERATE_INFOPLIST_FILE = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/RealisticBell/AudioDSP";
 				INFOPLIST_KEY_CFBundleDisplayName = "Realistic Bell";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
